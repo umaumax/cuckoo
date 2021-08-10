@@ -37,3 +37,4 @@ You cannot use this because of `mprotect` error!
 ## TODO
 * 置き換え前の関数を呼ぶ機構の追加
 * テストの追加
+* use `getpagesize()`
