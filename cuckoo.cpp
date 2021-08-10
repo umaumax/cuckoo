@@ -20,23 +20,27 @@ bool monkey_patch(void *original_func_ptr, const void *new_func_ptr) {
 #ifdef __x86_64__
 #define ASM_SIZE 12
   char op[ASM_SIZE];
-  // movq
+  // movq rax, address
   op[0] = 0x48;
   op[1] = 0xb8;
   // op[2~9] 8B
   uintptr_t *address = (uintptr_t *)&op[2];
   *address           = (uintptr_t)new_func_ptr;
-  // jmpq
+  // jmpq rax
   op[10] = 0xff;
   op[11] = 0xe0;
 #elif defined(__i386__)
 #define ASM_SIZE 5
   char op[ASM_SIZE];
-  // jmp
+  // jmp address
   op[0] = 0xe9;
   // op[1~4] 4B
+  // relative addres
   uintptr_t *address = (uintptr_t *)&op[1];
   *address           = new_func_ptr - original_func_ptr - ASM_SIZE;
+  // absolute address
+  // 0xBA, address[4B] // mov edx, address
+  // 0xFF, 0x22 // jmp edx
 #elif defined(__aarch64__)
 #error "not supported arch yet"
 #elif defined(__arm__)
