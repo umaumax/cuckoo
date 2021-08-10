@@ -8,7 +8,7 @@ g++ -std=c++11 -O3 -shared -fPIC example_hook.cpp cuckoo.cpp -o libexample_hook.
 
 # シンボルを公開しない場合は、何らかの方法で見つける必要がある
 g++ -std=c++11 example.cpp -o example
-#シンボルを公開すれば簡単
+# シンボルを公開すれば簡単
 g++ -std=c++11 example.cpp -o example -rdynamic
 
 LD_PRELOAD=./libexample_hook.so ./example
@@ -16,7 +16,7 @@ LD_PRELOAD=./libexample_hook.so ./example
 
 ## how to search symbol inside
 ### without ASLR
-事前に下記で見つけたアドレスを利用するか、実行時にelfファイルを解析する
+use address by below command or parse elf file while runtime
 ``` bash
 readelf -s -W example | grep add
 ```
@@ -25,10 +25,14 @@ readelf -s -W example | grep add
 WIP
 
 ## architecture
+### Linux
 * [x] x86_64
 * [?] x86
 * [ ] aarch32
 * [ ] aarch64
+
+### Mac
+You cannot use this because of `mprotect` error!
 
 ## TODO
 * 置き換え前の関数を呼ぶ機構の追加
