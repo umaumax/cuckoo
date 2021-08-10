@@ -54,7 +54,7 @@ bool monkey_patch(void *original_func_ptr, const void *new_func_ptr) {
                    ((uintptr_t)original_func_ptr % PAGE_SIZE));
   if (mprotect(original_func_ptr_offset, length,
                PROT_READ | PROT_WRITE | PROT_EXEC) == -1) {
-    std::cerr << "mprotect failed: " << std::strerror(errno) << std::endl;
+    fprintf(stderr, "mprotect failed: %s\n", std::strerror(errno));
     return false;
   }
   memcpy(original_func_ptr, op, ASM_SIZE);
