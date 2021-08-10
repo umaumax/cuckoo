@@ -170,7 +170,7 @@ void ElfData::ParseSectionHeaderToSymbols(const ElfW(Ehdr) * ehdr,
 }
 
 bool ElfData::ParseSymbol() {
-  ElfW(Ehdr) *ehdr        = (Elf64_Ehdr *)addr_;
+  ElfW(Ehdr) *ehdr        = (ElfW(Ehdr) *)addr_;
   ElfW(Shdr) *shdr        = nullptr;
   ElfW(Shdr) *sym_shdr    = nullptr;
   ElfW(Shdr) *dynsym_shdr = nullptr;
