@@ -1,7 +1,7 @@
 # cuckoo
 
 monkey patching tool for c++
-+
+
 ## how to use
 ``` bash
 g++ -std=c++11 -O3 -shared -fPIC example_hook.cpp cuckoo.cpp -o libexample_hook.so
@@ -36,5 +36,6 @@ You cannot use this because of `mprotect` error!
 
 ## TODO
 * 置き換え前の関数を呼ぶ機構の追加
+  * コンパイラの`-fpatchable-function-entry=N[,M]`によって、nopが連続している判定を追加して、元の関数を呼べるアドレスを記録する?
 * テストの追加
-* use `getpagesize()`
+* use `getpagesize()` instead of `4096`
